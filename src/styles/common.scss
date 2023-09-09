@@ -3,6 +3,7 @@
 $common-padding: 10px;
 $common-border: 1px solid #ccc;
 $common-margin: 10px;
+$common-border-radius: 5px;
 @mixin common-input-style {
   width: 100%;
   box-sizing: border-box;
