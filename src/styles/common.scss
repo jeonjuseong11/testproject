@@ -1,0 +1,12 @@
+/* common.scss */
+
+$common-padding: 10px;
+$common-border: 1px solid #ccc;
+$common-margin: 10px;
+@mixin common-input-style {
+  width: 100%;
+  box-sizing: border-box;
+  padding: $common-padding;
+  margin-bottom: 10px;
+  border: $common-border;
+}

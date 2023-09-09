@@ -1,0 +1,60 @@
+@import "../../styles/common.scss";
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  .authForm {
+    max-width: 300px;
+    width: 100%;
+
+    input {
+      width: 100%;
+      box-sizing: border-box; /* 추가: 패딩과 경계선을 포함한 너비로 계산 */
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button {
+      width: 100%;
+      padding: $common-padding;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      margin-top: $common-margin;
+
+      &:hover {
+        /* 버튼 공통 스타일 */
+      }
+
+      &.loginButton {
+        background-color: #007bff;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+
+      &.registerButton {
+        background-color: #28a745;
+        color: #fff;
+
+        &:hover {
+          background-color: #1e7e34;
+        }
+      }
+    }
+  }
+}
