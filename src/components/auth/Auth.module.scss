@@ -24,12 +24,12 @@
     }
 
     a {
-      color: #007bff; // Default link color
-      text-decoration: underline; // Add underline to links
+      color: #007bff;
+      text-decoration: underline;
 
       &:hover {
-        color: #0056b3; // Hover color for links
-        text-decoration: underline; // Maintain underline on hover
+        color: #0056b3;
+        text-decoration: underline;
       }
     }
     button {
@@ -143,19 +143,19 @@
       }
 
       &.loginButton {
-        background-color: #007bff; // Login button color in dark mode
+        background-color: #007bff;
 
         &:hover {
-          background-color: #0056b3; // Hover color for login button in dark mode
+          background-color: #0056b3;
         }
       }
 
       &.registerButton {
-        background-color: #28a745; // Register button color in dark mode
+        background-color: #28a745;
         color: #fff;
 
         &:hover {
-          background-color: #1e7e34; // Hover color for register button in dark mode
+          background-color: #1e7e34;
         }
       }
     }
