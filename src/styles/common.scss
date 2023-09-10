@@ -1,13 +1,23 @@
-/* common.scss */
-
 $common-padding: 10px;
 $common-border: 1px solid #ccc;
-$common-margin: 10px;
 $common-border-radius: 5px;
+
 @mixin common-input-style {
   width: 100%;
   box-sizing: border-box;
   padding: $common-padding;
   margin-bottom: 10px;
   border: $common-border;
+}
+.errorMessage {
+  opacity: 0;
+  color: red;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: opacity 0.5s ease;
+}
+
+.errorMessage.show {
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }

@@ -1,6 +1,6 @@
 // rootSaga.ts
 import { all } from "redux-saga/effects";
-import authSaga from "./auth/authSaga"; // authSaga 가져오기
+import authSaga from "./auth/authSaga";
 // 다른 사가들을 가져오면 여기에 추가
 
 function* rootSaga() {

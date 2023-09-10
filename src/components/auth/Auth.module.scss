@@ -14,7 +14,6 @@
       width: 100%;
       box-sizing: border-box;
       padding: 10px;
-      margin-bottom: 20px;
       height: 50px;
       border: 1px solid #ccc;
       border-radius: $common-border-radius;
@@ -40,6 +39,8 @@
       cursor: pointer;
       color: #fff;
       border-radius: $common-border-radius;
+      transition: background-color 0.3s; /* 버튼 공통 스타일 */
+
       &:hover {
         /* 버튼 공통 스타일 */
       }
@@ -64,99 +65,29 @@
   }
 }
 
-//다크모드 설정 스위치
-.themeToggle {
-  position: absolute;
-  top: 20px; /* 조절하여 원하는 높이로 조정 */
-  right: 20px; /* 조절하여 원하는 위치로 조정 */
-  display: flex;
-  align-items: center;
-  width: 150px;
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 30px;
-
-    input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: 0.4s;
-      border-radius: 15px;
-
-      &:before {
-        position: absolute;
-        content: "";
-        height: 22px;
-        width: 22px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        transition: 0.4s;
-        border-radius: 50%;
-      }
-    }
-
-    input:checked + .slider {
-      background-color: #2196f3;
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(30px);
-    }
-  }
-
-  .themeText {
-    margin-left: 10px;
-    flex: 1;
-  }
-
-  .themeLabelText {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
 // 다크모드
 [data-theme="dark"] {
-  .authContainer {
-    background-color: #333333;
-    color: #ffffff;
+  .authForm {
+    input {
+      background-color: #444444;
+      color: #ffffff;
+      border: 1px solid #666666;
+    }
 
-    .authForm {
-      input {
-        background-color: #444444;
-        color: #ffffff;
-        border: 1px solid #666666;
+    &.loginButton {
+      background-color: #007bff;
+
+      &:hover {
+        background-color: #0056b3;
       }
+    }
 
-      &.loginButton {
-        background-color: #007bff;
+    &.registerButton {
+      background-color: #28a745;
+      color: #fff;
 
-        &:hover {
-          background-color: #0056b3;
-        }
-      }
-
-      &.registerButton {
-        background-color: #28a745;
-        color: #fff;
-
-        &:hover {
-          background-color: #1e7e34;
-        }
+      &:hover {
+        background-color: #1e7e34;
       }
     }
   }

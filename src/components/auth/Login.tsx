@@ -1,46 +1,74 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginRequest } from "../../store/auth/authActions";
-import { getInitialTheme, setTheme, toggleTheme } from "../../utils/theme";
+import { RootState } from "../../store/configureStore";
+import { getInitialTheme } from "../../utils/theme";
+import ThemeToggle from "../ThemeToggle";
 
 import styles from "./Auth.module.scss";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
+  const authState = useSelector((state: RootState) => state.auth);
+
   const [formData, setFormData] = useState({ username: "", password: "" });
-  const [currentTheme, setCurrentTheme] = useState(() => {
-    const initialTheme = getInitialTheme();
-    setTheme(initialTheme); // 초기 테마 설정을 로컬 스토리지에 저장
-    return initialTheme;
-  });
+  const [errors, setErrors] = useState<{ username: string | null; password: string | null }>({
+    username: null,
+    password: "",
+  }); // 여기서 password를 빈 문자열로 초기화
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    // 입력값이 변경될 때마다 에러 메시지 초기화
+    setErrors({ ...errors, [name]: "" });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const { username, password } = formData;
+    const newErrors = { username: "", password: "" }; // 빈 문자열로 초기화
+
+    if (!username.trim()) {
+      newErrors.username = "아이디를 입력하세요.";
+    }
+
+    if (!password.trim()) {
+      newErrors.password = "비밀번호를 입력하세요.";
+    }
+
+    if (newErrors.username || newErrors.password) {
+      // 에러가 있는 경우 에러 상태를 업데이트하고 요청을 보내지 않음
+      setErrors(newErrors);
+      return;
+    }
+
     dispatch(loginRequest(formData));
   };
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", currentTheme);
-  }, [currentTheme]);
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  };
 
   useEffect(() => {
-    setCurrentTheme(getInitialTheme());
+    document.documentElement.setAttribute("data-theme", getInitialTheme());
   }, []);
 
-  const toggleAndSetTheme = () => {
-    toggleTheme();
-    setCurrentTheme(getInitialTheme());
-  };
+  useEffect(() => {
+    if (authState.error) {
+      // 로그인 실패 시 에러 메시지 설정
+      setErrors({ username: authState.error, password: "" });
+    }
+  }, [authState.error]);
 
   return (
     <div className={styles.authContainer}>
       <h1>로그인</h1>
-      <form className={styles.authForm} onSubmit={handleSubmit}>
+      <form className={styles.authForm} onSubmit={handleSubmit} onKeyPress={handleKeyPress}>
         <div>
           <input
             type="text"
@@ -50,6 +78,13 @@ const Login: React.FC = () => {
             placeholder="아이디"
             onChange={handleChange}
           />
+          <p
+            className={
+              errors.password ? `${styles.errorMessage}  ${styles.show}` : styles.errorMessage
+            }
+          >
+            {errors.username}
+          </p>
         </div>
         <div>
           <input
@@ -60,7 +95,15 @@ const Login: React.FC = () => {
             placeholder="비밀번호"
             onChange={handleChange}
           />
+          <p
+            className={
+              errors.password ? `${styles.errorMessage}  ${styles.show}` : styles.errorMessage
+            }
+          >
+            {errors.password}
+          </p>
         </div>
+
         <button type="submit" className={styles.loginButton}>
           로그인
         </button>
@@ -68,15 +111,7 @@ const Login: React.FC = () => {
           Fluma 회원이 아닌가요? <a href="/register">지금 가입하세요</a>
         </p>
       </form>
-      <div className={styles.themeToggle}>
-        <label className={styles.switch}>
-          <input type="checkbox" checked={currentTheme === "dark"} onChange={toggleAndSetTheme} />
-          <span className={styles.slider}></span>
-        </label>
-        <span className={styles.themeText}>
-          {currentTheme === "light" ? "라이트 모드" : "다크 모드"}
-        </span>
-      </div>
+      <ThemeToggle />
     </div>
   );
 };
