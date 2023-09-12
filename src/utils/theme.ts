@@ -8,7 +8,7 @@ export const toggleTheme = () => {
   setTheme(newTheme);
 };
 
-export const setTheme = (theme) => {
+export const setTheme = (theme: string) => {
   localStorage.setItem(THEME_KEY, theme);
   document.documentElement.setAttribute("data-theme", theme);
 };

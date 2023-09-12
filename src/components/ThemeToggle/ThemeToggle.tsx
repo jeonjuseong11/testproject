@@ -1,7 +1,7 @@
 // ThemeToggle.js
 
 import React, { useState, useEffect } from "react";
-import { getInitialTheme, toggleTheme } from "../utils/theme";
+import { getInitialTheme, toggleTheme } from "../../utils/theme";
 import styles from "./ThemeToggle.module.scss"; // 테마 토글 스위치 컴포넌트의 스타일 파일을 불러옵니다.
 
 const ThemeToggle: React.FC = () => {
