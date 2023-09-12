@@ -8,20 +8,22 @@
 
 ```plaintext
 | |-- components/
-| | |-- Auth
-| | | |-- Login.tsx       # 로그인 컴포넌트
-| | | |-- Register.tsx    # 회원가입 컴포넌트
+| | |-- Auth/              # 로그인/회원가입 컴포넌트
+| | |-- Header/            # 헤더 컴포넌트
+| | |-- ThemeToggle/       # 다크모드 전환 스위치 폴더
+|-- pages/                 # 페이지 폴더
+| |-- Home/                # 홈페이지 폴더
 |-- store/
-| |-- auth/
-| | |-- authActions.ts    # 계정 관련 액션 관련 파일
-| | |-- authReducer.ts    # 계정 관련 리듀서
-| | |-- authSelectors.ts  # 계정 관련 셀렉터
-| | |-- authSaga.ts       # 계정 관련 사가
+| |-- auth/                # 계정 관련 리듀서, 셀렉터, 사가, 액션 파일
+| |-- document/            # 문서 관련 리듀서, 셀렉터, 사가, 액션 파일
 | |-- rootReducer.ts      # 루트 리듀서
 | |-- rootSaga.ts         # 루트 사가
 | |-- configureStore.ts   # 스토어 설정 파일
 |-- styles/
-| |-- main.scss           # 전역 스타일 및 변수 정의
+| |-- buttonStyle.scss    # 버튼 스타일 및 변수 정의
+| |-- common.scss         # 전역 스타일 및 변수 정의
+|-- utils/
+| |-- theme.ts            # 다크 모드 관련 함수 정의
 |-- App.tsx               # 앱 진입점
 |-- index.tsx             # 앱 엔트리 포인트
 ```
@@ -34,7 +36,7 @@
 - TypeScript
 - Redux Toolkit
 - Redux Saga
-- SCSS (CSS 전처리기)
+- SCSS
 
 ## 실행 방법
 
