@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
 import { loginRequest } from "../../store/auth/authActions";
-import { RootState } from "../../store/configureStore";
 import { getInitialTheme } from "../../utils/theme";
-import ThemeToggle from "../ThemeToggle";
+import logo from "../../assets/FlumaLogo.png";
 
 import styles from "./Auth.module.scss";
+import { selectAuth, selectIsAuthenticated } from "../../store/auth/authSelectors";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
-  const authState = useSelector((state: RootState) => state.auth);
+  const authState = useSelector(selectAuth);
+  const user = localStorage.getItem("user");
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log(authState);
+  }, [authState]);
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState<{ username: string | null; password: string | null }>({
     username: null,
     password: "",
   }); // 여기서 password를 빈 문자열로 초기화
+
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  useEffect(() => {
+    if (isAuthenticated) {
+      redirect("/document");
+    }
+  }, [isAuthenticated]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -57,17 +70,24 @@ const Login: React.FC = () => {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", getInitialTheme());
   }, []);
+  useEffect(() => {
+    if (user) {
+      navigate(-1);
+    }
+  }, [user]);
 
   useEffect(() => {
     if (authState.error) {
       // 로그인 실패 시 에러 메시지 설정
-      setErrors({ username: authState.error, password: "" });
+      alert(authState.error);
     }
   }, [authState.error]);
 
   return (
     <div className={styles.authContainer}>
-      <h1>로그인</h1>
+      <Link to="/">
+        <img src={logo} alt="로고 이미지" className={styles.logo} />
+      </Link>
       <form className={styles.authForm} onSubmit={handleSubmit} onKeyPress={handleKeyPress}>
         <div>
           <input
@@ -108,10 +128,9 @@ const Login: React.FC = () => {
           로그인
         </button>
         <p>
-          Fluma 회원이 아닌가요? <a href="/register">지금 가입하세요</a>
+          Fluma 회원이 아닌가요? <Link to="/register">지금 가입하세요</Link>
         </p>
       </form>
-      <ThemeToggle />
     </div>
   );
 };

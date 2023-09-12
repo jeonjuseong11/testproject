@@ -1,0 +1,54 @@
+/* Home.module.scss */
+
+.homeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-bottom: 100px;
+}
+
+.centeredContent {
+  text-align: center;
+  margin-top: 200px;
+  width: 80%;
+}
+.rightSideContent {
+  text-align: right;
+  margin-top: 200px;
+  width: 80%;
+}
+.leftSideContent {
+  text-align: left;
+  margin-top: 200px;
+  width: 80%;
+}
+.heading {
+  font-size: 40px;
+}
+.secHeading {
+  font-size: 30px;
+}
+.subHeading {
+  font-size: 20px;
+}
+
+.description {
+  font-size: 15px;
+}
+@import "../../styles/buttonStyles.scss";
+
+.button {
+  @extend .button; // 버튼 스타일 확장
+  width: 200px;
+  height: 50px;
+  margin-top: 10px;
+}
+
+// 다크 모드 스타일
+[data-theme="dark"] {
+  .button {
+    @extend .button; // 버튼 스타일 확장
+  }
+}

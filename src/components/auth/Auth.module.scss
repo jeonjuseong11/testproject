@@ -6,8 +6,16 @@
   justify-content: center;
   height: 100vh;
 
+  .logoContainer {
+    padding-left: 16px;
+  }
+  .logo {
+    height: auto;
+    width: 150px;
+  }
+
   .authForm {
-    max-width: 500px;
+    max-width: 400px;
     width: 100%;
 
     input {
@@ -17,6 +25,16 @@
       height: 50px;
       border: 1px solid #ccc;
       border-radius: $common-border-radius;
+      transition: border-color 0.3s, box-shadow 0.3s; /* 추가: hover 및 focus 효과 스타일 */
+
+      &:hover {
+        border-color: #007bff; /* 추가: hover 효과 스타일 */
+      }
+
+      &:focus {
+        border-color: #007bff; /* 추가: focus 효과 스타일 */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 추가: focus 효과 스타일 */
+      }
     }
     p {
       font-size: 20px;
