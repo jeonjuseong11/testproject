@@ -40,7 +40,7 @@
 @import "../../styles/buttonStyles.scss";
 
 .button {
-  @extend .button; // 버튼 스타일 확장
+  @extend .button;
   width: 200px;
   height: 50px;
   margin-top: 10px;
@@ -49,6 +49,6 @@
 // 다크 모드 스타일
 [data-theme="dark"] {
   .button {
-    @extend .button; // 버튼 스타일 확장
+    @extend .button;
   }
 }

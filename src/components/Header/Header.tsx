@@ -37,7 +37,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logoContainer}>
-        <Link to="/">
+        <Link to={user ? "/document" : "/"}>
           <img src={logo} alt="로고 이미지" className={styles.logo} />
         </Link>
       </div>
