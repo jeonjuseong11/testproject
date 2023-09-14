@@ -10,9 +10,10 @@ import {
   selectDocumentError,
 } from "../../store/document/documentSelectors";
 import Modal from "../../utils/Modal";
-import Header from "../Header/Header";
+import DocumentItem from "../../components/Document/DocumentItem"; // Document 컴포넌트 임포트
 
-import styles from "./DocumentList.module.scss"; // SCSS 모듈 임포트
+import styles from "../../components/Document/Document.module.scss"; // SCSS 모듈 임포트
+import Layout from "../../components/Layout/Layout";
 
 const DocumentList: React.FC = () => {
   const dispatch = useDispatch();
@@ -40,8 +41,7 @@ const DocumentList: React.FC = () => {
   };
 
   return (
-    <div>
-      <Header />
+    <Layout>
       <h2>문서 목록</h2>
       {loading ? (
         <p>Loading...</p>
@@ -50,25 +50,20 @@ const DocumentList: React.FC = () => {
       ) : (
         <div className={styles.documentCardContainer}>
           {documents?.map((document) => (
-            <div
-              key={document.documentId}
-              className={styles.documentCard}
-              // onClick={() => openDocumentModal(document)}
-            >
-              <h3 className={styles.documentTitle}>{document.title}</h3>
-            </div>
+            <>
+              <DocumentItem key={document.documentId} documentData={document} />
+            </>
           ))}
         </div>
       )}
 
-      {/* 모달 렌더링 */}
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           <h2>로그인이 필요합니다</h2>
           <p>문서를 볼려면 먼저 로그인하세요.</p>
         </Modal>
       )}
-    </div>
+    </Layout>
   );
 };
 

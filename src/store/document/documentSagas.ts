@@ -20,7 +20,7 @@ import {
   updateDocumentSuccess,
   updateDocumentFailure,
 } from "./documentActions";
-import { Document } from "./types";
+import { DocumentInfo } from "./types";
 
 // 글 리스트 로딩
 function* loadDocuments(action: any) {
@@ -30,17 +30,15 @@ function* loadDocuments(action: any) {
     if (access_token) {
       // API 호출
       const response: AxiosResponse<any> = yield call(() =>
-        axios.get("/documents", {
-          data: { username: action.payload },
+        axios.get(`/documents?username=${action.payload}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${access_token}`,
           },
         })
       );
-
       if (response.status === 200) {
-        const documents: Document[] = response.data.dtoList;
+        const documents: DocumentInfo[] = response.data.dtoList;
         console.log(response.data);
         yield put(loadDocumentsSuccess(documents));
       } else {
@@ -59,7 +57,7 @@ function* loadDocument(action: any) {
   try {
     const accessToken = localStorage.getItem("access_token");
     const response: AxiosResponse<any> = yield call(() =>
-      axios.post(`/documents/${action.payload}`, null, {
+      axios.get(`/documents/${action.payload}`, {
         headers: {
           "Content-Type": "application/json", // Content-Type 추가
           Authorization: `Bearer ${accessToken}`,

@@ -1,10 +1,10 @@
 // store/document/documentReducers.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Document } from "./types";
+import { DocumentDetailInfo, DocumentInfo } from "./types";
 
 interface DocumentState {
-  documentsList: Document[];
-  singleDocument: Document | null;
+  documentsList: DocumentInfo[];
+  singleDocument: DocumentDetailInfo | null;
   loading: boolean;
   error: string | null;
 }
@@ -24,7 +24,7 @@ const documentReducer = createSlice({
       state.loading = true;
       state.error = null;
     },
-    loadDocumentsSuccess: (state, action: PayloadAction<Document[]>) => {
+    loadDocumentsSuccess: (state, action: PayloadAction<DocumentInfo[]>) => {
       state.loading = false;
       state.documentsList = action.payload;
     },
@@ -36,7 +36,7 @@ const documentReducer = createSlice({
       state.loading = true;
       state.error = null;
     },
-    loadDocumentSuccess: (state, action: PayloadAction<Document | null>) => {
+    loadDocumentSuccess: (state, action: PayloadAction<DocumentDetailInfo | null>) => {
       state.loading = false;
       state.singleDocument = action.payload;
     },
