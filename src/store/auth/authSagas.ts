@@ -1,7 +1,6 @@
 // authSaga.js
 import { put, takeLatest, call } from "redux-saga/effects";
 import axios, { AxiosResponse } from "axios";
-import Cookies from "js-cookie"; // js-cookie 라이브러리 import
 
 import {
   loginRequest,

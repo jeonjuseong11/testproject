@@ -1,14 +1,15 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { getInitialTheme } from "./utils/theme";
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
-import { Provider, useSelector } from "react-redux";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Home from "./pages/Home/Home";
-import DocumentsList from "./components/Document/DocumentList";
+import DocumentsList from "./pages/List/DocumentList";
 import { selectIsAuthenticated } from "./store/auth/authSelectors";
 
 import "./App.module.scss";
+import DocumentDetailPage from "./pages/Detail/DocumentDetail";
 
 function App() {
   const initialTheme = getInitialTheme();
@@ -34,6 +35,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/document" element={<DocumentsList />} />
+          <Route path="/document/:documentId" element={<DocumentDetailPage />} />
         </Routes>
       </div>
     </Router>
